@@ -45,7 +45,6 @@ class BoutiquePostCell: UICollectionViewCell {
             contentLabel.text = model.title
             readCountLabel.text = "浏览 " + String(model.readCount!)
             likeCountLabel.text = String(model.likeCount!)
-            
         }
     }
     
