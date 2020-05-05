@@ -14,7 +14,7 @@
     if (self = [super initWithFrame:frame]) {
         self.translatesAutoresizingMaskIntoConstraints = false;
 //        NSLayoutConstraint *constraint = [NSLayoutConstraint  constraintWithItem:<#(nonnull id)#> attribute:<#(NSLayoutAttribute)#> relatedBy:<#(NSLayoutRelation)#> toItem:<#(nullable id)#> attribute:<#(NSLayoutAttribute)#> multiplier:<#(CGFloat)#> constant:<#(CGFloat)#>]
-//:       [NSLayoutConstraint activateConstraints:@[ ]];
+//:       [NSLayoutConstraint activateConstraints:@[ ]]; //add some code
         NSLog(@"Print new home thanks for you help ok good moring vehcile");
     }
     return self;
