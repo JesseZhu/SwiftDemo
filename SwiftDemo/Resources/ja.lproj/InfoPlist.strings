@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  SwiftDemo
+
+  Created by Jesse on 2020/1/13.
+  Copyright © 2020 Jesse.Zhu. All rights reserved.
+*/
+
+// Localizable App Name是App在英语环境环境下显示的名称
+CFBundleDisplayName = "Swift Demo";

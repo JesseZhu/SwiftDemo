@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Zyu-fU-ias">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Lock-->
+        <scene sceneID="O5y-R7-aiA">
+            <objects>
+                <viewController id="Zyu-fU-ias" customClass="FirstViewController" customModule="Bluetooth" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dnE-b6-0du">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="uyU-xG-tYh">
+                                <rect key="frame" x="50" y="144" width="314" height="618"/>
+                                <subviews>
+                                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="sIP-0u-nns">
+                                        <rect key="frame" x="0.0" y="0.0" width="314" height="196"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wlq-ar-iLV">
+                                                <rect key="frame" x="72.5" y="83" width="169" height="30"/>
+                                                <state key="normal" title="搜索附近所有的蓝牙设备"/>
+                                                <connections>
+                                                    <action selector="scanAllAction:" destination="Zyu-fU-ias" eventType="touchUpInside" id="573-Us-cRs"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Wlq-ar-iLV" firstAttribute="centerY" secondItem="sIP-0u-nns" secondAttribute="centerY" id="iL7-ij-Jif"/>
+                                            <constraint firstItem="Wlq-ar-iLV" firstAttribute="centerX" secondItem="sIP-0u-nns" secondAttribute="centerX" id="nEQ-fF-fdQ"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Z9-h9-JMf">
+                                        <rect key="frame" x="0.0" y="211" width="314" height="196"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVT-s7-3GV">
+                                                <rect key="frame" x="80.5" y="83" width="153" height="30"/>
+                                                <state key="normal" title="扫描蓝牙设备的二维码"/>
+                                                <connections>
+                                                    <action selector="sacnQRAction:" destination="Zyu-fU-ias" eventType="touchUpInside" id="ESH-sN-Mc3"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(16位二维码)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGF-F5-Qrs">
+                                                <rect key="frame" x="121.5" y="113" width="71.5" height="14.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="NGF-F5-Qrs" firstAttribute="centerX" secondItem="SVT-s7-3GV" secondAttribute="centerX" id="BHR-LG-PhT"/>
+                                            <constraint firstItem="SVT-s7-3GV" firstAttribute="centerX" secondItem="4Z9-h9-JMf" secondAttribute="centerX" id="Ry4-JL-iYv"/>
+                                            <constraint firstItem="NGF-F5-Qrs" firstAttribute="top" secondItem="SVT-s7-3GV" secondAttribute="bottom" id="flW-so-kSl"/>
+                                            <constraint firstItem="SVT-s7-3GV" firstAttribute="centerY" secondItem="4Z9-h9-JMf" secondAttribute="centerY" id="spy-ny-iHT"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c9V-5q-gJg">
+                                        <rect key="frame" x="0.0" y="422" width="314" height="196"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="uyU-xG-tYh" firstAttribute="top" secondItem="3m5-BM-NCf" secondAttribute="top" constant="100" id="FLe-h4-dyB"/>
+                            <constraint firstItem="3m5-BM-NCf" firstAttribute="trailing" secondItem="uyU-xG-tYh" secondAttribute="trailing" constant="50" id="VOS-Np-6Vc"/>
+                            <constraint firstItem="3m5-BM-NCf" firstAttribute="bottom" secondItem="uyU-xG-tYh" secondAttribute="bottom" constant="100" id="lrm-0w-AGn"/>
+                            <constraint firstItem="uyU-xG-tYh" firstAttribute="leading" secondItem="3m5-BM-NCf" secondAttribute="leading" constant="50" id="yEy-7F-lj3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3m5-BM-NCf"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Lock" id="30X-2n-1Le"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZJX-ix-NqF" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1044" y="1551"/>
+        </scene>
+    </scenes>
+</document>
