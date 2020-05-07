@@ -2,103 +2,104 @@ import UIKit
 //import RxSwift
 //import RxCocoa
 //import RxRelay
-//import HandyJSON
+import HandyJSON
 
 //print(UIDevice.current.identifierForVendor?.uuidString)
+
+func testURLComponents() {
+    var components = URLComponents(url: URL(string: "http://www.baidu.com?key=1&serach=faff")!, resolvingAgainstBaseURL: true)!
+    print(components.queryItems as Any)
+    components.queryItems = [
+       URLQueryItem(name: "api_key", value: "123"),
+       URLQueryItem(name: "language", value: Locale.preferredLanguages[0])
+    ]
+    components.queryItems?.append(URLQueryItem(name: "type", value: "1"))
+    print(components.url?.absoluteString as Any)
+}
+
+//testURLComponents()
 
 let credit = 128060
 let str = String(format: "%4d", credit)
 
-let dict = ["2227":"w","2215":"bbt","36":"bba"]
-
-let keyss = dict.map { (key, value)  in
-    return key
+func testArray() {
+    struct Student {
+        let name: String
+        let score: Int = 80
+        let age: Int
+    }
+    
+    let student1 = Student(name: "张三", age: 23)
+    let student2 = Student(name: "李四", age: 24)
+    let student3 = Student(name: "王二", age: 25)
+    
+    let students = [student1, student2, student3]
+    
+    let names = students.compactMap {
+        $0.name
+    }
+    print("所有学生的姓名：\(names)")
+    
+    let namess = students.flatMap({$0.name})
+    print("所有学生的姓名：\(namess)")
+    
+    
+    let numbers = [1, 2, 3, 4, 5]
+    let doubled = numbers.map { $0 * 2 }
+    
+    let milesToPoint = ["point1":120.0,"point2":50.0,"point3":70.0]
+    let kmToPoint = milesToPoint.map { (key,value)  in
+        return key
+    }
+    let ff = milesToPoint.reduce("all") { (str, arg1)  in
+        return arg1.key + str
+    }
+    print(kmToPoint)
 }
-let keyssss = dict.filter { (key, value) in
-    return key != "15"
+
+testArray()
+
+func testDict() {//字典排序
+    let dict = ["2227":"w","2215":"bbt","36":"bba"]
+
+    let keyss = dict.map { (key, value)  in
+        return key
+    }
+    let keyssss = dict.filter { (key, value) in
+        return key != "15"
+    }
+
+    print(keyss)
+    print(keyssss)
+    
+    let keys = dict.sorted(by: {$0.0 < $1.0})
+    let values = dict.sorted(by: {$0.1 < $1.1})
+
+    print(keys)
+    print(values)
 }
 
-let keys = dict.sorted(by: {$0.0 < $1.0})
-let values = dict.sorted(by: {$0.1 < $1.1})
-
-print(keys)
-print(values)
-
-var testDict: [String: String] = ["222":"mmmm"]
-
-let bookAmount = ["harrypotter": 100.0, "junglebook": 100.0]
-let returnFormatMap = bookAmount.map { (key, value) in
-    return key.capitalized
-}
-print(returnFormatMap)
+//testDict()
 
 let quote = "The revolution will be Swift"
-let substring = quote.dropFirst(23)
+let substring = quote.dropFirst(2)
 let realString = String(substring)
 
 let max = Int.max
 
-print(String(format: "%.f", Date.init().timeIntervalSince1970))
-let view = UIView(frame: CGRect(x: 0, y: -50, width:230, height: 100))
 
-//view.layer.shadowColor = UIColor.black.cgColor
-//view.layer.shadowOffset = CGSize(width: 0, height: 10)
-//view.layer.shadowRadius = 40
-//view.layer.shadowOpacity = 0.8
-view.layer.masksToBounds = true
-view.layer.cornerRadius = 100
-
-let gradientLayer = CAGradientLayer()
-gradientLayer.frame = CGRect(x: 0, y: 30, width: 230, height: 2)
-gradientLayer.colors = [UIColor.red.cgColor, UIColor.green.cgColor, UIColor.blue.cgColor ]
-gradientLayer.position = view.center
-gradientLayer.borderWidth = 2
-gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-gradientLayer.endPoint = CGPoint(x: 0, y: 1)
-view.layer.addSublayer(gradientLayer)
-view.backgroundColor = .yellow
-var arr1 = [[1,2,3],[4,5,6]]
-var arrr3 = arr1.flatMap { (sss) -> [Int] in
+var arr1 = [[1,2,nil,3],[4,5,6, nil]]
+var arrr3 = arr1.flatMap { (sss) -> [Int?] in
     return sss
 }
 var fff = arrr3
-
-var share = "https://baidu.com"
-
-if share.hasPrefix("http:") {
-    let ss = share.replacingOccurrences(of: "http:", with: "https:")
-}
-
-//let path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: [UIRectCorner.bottomLeft, UIRectCorner.bottomRight], cornerRadii: CGSize(width: 50, height: 0))
-//let cornerLayer = CAShapeLayer()
-//cornerLayer.frame = view.bounds
-//cornerLayer.path = path.cgPath
-//view.layer.mask = cornerLayer
-
-//cornerLayer.shadowColor = UIColor.red.cgColor
-//cornerLayer.shadowOffset = CGSize(width: 0, height: 15)
-//cornerLayer.shadowRadius = 5
-//cornerLayer.shadowOpacity = 0.8
-
-let contentView = UIView(frame: CGRect(x: 10, y: 10, width: 230, height: 230))
-contentView.backgroundColor = .white
-contentView.addSubview(view)
-
-let milesToPoint = ["point1":120.0,"point2":50.0,"point3":70.0]
-let kmToPoint = milesToPoint.map { (key,value)  in
-    return key
-}
-let ff = milesToPoint.reduce("all") { (str, arg1)  in
-    return arg1.key + str
-}
-print(kmToPoint)
-
 
 public enum  Result<Suc, Fal>{
     case suces(Suc)
     case failur(Fal)
 }
 
+//柯里化
 func add1(_ v3: Int) -> (Int) -> (Int) -> Int {
     return {  v2 in
         return { v1 in
@@ -153,7 +154,6 @@ print("343fsf123".zb.numberCount)
 let x: Int? = 3
 let y: Int? = nil
 
-var str = "Hello"
 let startIndex = str.index(str.startIndex, offsetBy: 1)
 let endIndex = str.index(str.startIndex, offsetBy: 3)
 var ff444 = str.replacingCharacters(in: startIndex...endIndex, with: "new")

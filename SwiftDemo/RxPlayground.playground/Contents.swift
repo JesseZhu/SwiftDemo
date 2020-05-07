@@ -5,17 +5,10 @@ import RxCocoa
 import RxRelay
 import HandyJSON
 
-var components = URLComponents(url: URL(string: "http://www.baidu.com?key=1&serach=faff")!, resolvingAgainstBaseURL: true)!
-print(components.queryItems as Any)
-components.queryItems = [
-   URLQueryItem(name: "api_key", value: "123"),
-   URLQueryItem(name: "language", value: Locale.preferredLanguages[0])
-]
-components.queryItems?.append(URLQueryItem(name: "type", value: "1"))
-print(components.url?.absoluteString as Any)
-let arr = [[1, 2, 3], [4, 5]]
 
+let arr = [[1, 2, 3], [4, 5]]
 let newArr = arr.flatMap { $0 }
+
 let languages = UserDefaults.standard.object(forKey: "AppleLanguages")
 print(languages as Any)
 var observable = BehaviorRelay(value: "12")
@@ -24,7 +17,7 @@ observable.subscribe(onNext: { str in
         print(str)
 })
 
-_ = Observable<Int>.timer(0, period: 1, scheduler: MainScheduler.instance)
+_ = Observable<Int>.timer(DispatchTimeInterval.seconds(0), period: .seconds(1), scheduler: MainScheduler.instance)
     .take(5)
     .map({ 5 - $0 })
     .map(String.init)
@@ -186,7 +179,7 @@ actionThree.subscribe(onNext: { (str) in
     print("Replay2-->: \(str ?? "")")
 })
 
-_ = actionOne.buffer(timeSpan: 10, count: 2, scheduler: MainScheduler.instance).subscribe(onNext: { (str) in
+_ = actionOne.buffer(timeSpan: .seconds(10), count: 2, scheduler: MainScheduler.instance).subscribe(onNext: { (str) in
     print("actionOneB->:\(str )")
 })
 actionOne.accept("Ann")
@@ -224,5 +217,3 @@ Observable.just(1)
 var label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 30))
 BehaviorSubject(value: "Test").bind(to: label.rx.text)
 label.backgroundColor = .red
-
-Observable.merge()
