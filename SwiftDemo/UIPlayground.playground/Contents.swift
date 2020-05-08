@@ -4,7 +4,7 @@ import UIKit
 import PlaygroundSupport
 import SnapKit
 
-class MyViewController : UIViewController {
+class ViewController1 : UIViewController {
     override func loadView() {
         let view = UIView()
         view.backgroundColor = .white
@@ -27,10 +27,30 @@ class MyViewController : UIViewController {
         imageView.layer.shadowColor = UIColor.black.cgColor
         view.addSubview(imageView)
         self.view = view
+        
+        let view1 = UIView(frame: CGRect(x: 100, y: 150, width:230, height: 100))
+        //view.layer.shadowColor = UIColor.black.cgColor
+        //view.layer.shadowOffset = CGSize(width: 0, height: 10)
+        //view.layer.shadowRadius = 40
+        //view.layer.shadowOpacity = 0.8
+        view1.layer.masksToBounds = true
+        view1.layer.cornerRadius = 50
+        view.addSubview(view1)
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(x: 0, y: 30, width: 230, height: 2)
+        gradientLayer.colors = [UIColor.red.cgColor, UIColor.green.cgColor, UIColor.blue.cgColor ]
+        gradientLayer.position = view.center
+        gradientLayer.borderWidth = 2
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+        
+        view1.layer.addSublayer(gradientLayer)
+        view1.backgroundColor = .yellow
     }
 }
 
-class ViewController: UIViewController {
+class ViewController2: UIViewController {
      
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,10 +171,7 @@ class ViewController: UIViewController {
     }
 }
 
-import UIKit
-import SnapKit
- 
-class ViewController1: UIViewController {
+class ViewController3: UIViewController {
      
     lazy var box = UIView()
      
@@ -205,9 +222,6 @@ class ViewController1: UIViewController {
     }
 }
 
+
 // Present the view controller in the Live View window
 PlaygroundPage.current.liveView = ViewController1()
-
-let text = "Title"
-
-
