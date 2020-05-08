@@ -35,6 +35,15 @@ _ = Observable<Int>.timer(0, period: 1, scheduler: MainScheduler.instance)
         print($0)
     })
 
+Observable<String>.create{ observable in
+    print("AA")
+    observable.onNext("A")
+    observable.onNext("B")
+    return Disposables.create()
+}.subscribe { (str) in
+    print(str)
+}
+
 let group = DispatchGroup()
 group.enter()
 //Dispatch.quen.MainScheduler
@@ -224,5 +233,3 @@ Observable.just(1)
 var label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 30))
 BehaviorSubject(value: "Test").bind(to: label.rx.text)
 label.backgroundColor = .red
-
-Observable.merge()
