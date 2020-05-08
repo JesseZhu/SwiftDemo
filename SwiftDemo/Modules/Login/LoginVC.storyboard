@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rFj-9V-n6b">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rFj-9V-n6b">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,21 +38,29 @@
                                 <rect key="frame" x="40" y="358" width="334" height="30"/>
                                 <state key="normal" title="Sign in"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5D-FY-Xaw">
+                                <rect key="frame" x="40" y="802" width="334" height="30"/>
+                                <state key="normal" title="Test RxVC"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Rem-fI-820" firstAttribute="top" secondItem="sx4-1j-unJ" secondAttribute="top" constant="135" id="6Za-Vl-NI9"/>
+                            <constraint firstItem="sx4-1j-unJ" firstAttribute="trailing" secondItem="w5D-FY-Xaw" secondAttribute="trailing" constant="40" id="ANC-XC-aTi"/>
                             <constraint firstItem="Rem-fI-820" firstAttribute="leading" secondItem="sx4-1j-unJ" secondAttribute="leading" constant="40" id="BYo-kt-0KD"/>
                             <constraint firstItem="it4-Y9-BhM" firstAttribute="top" secondItem="Rem-fI-820" secondAttribute="bottom" constant="59" id="O0l-9v-Rpa"/>
                             <constraint firstItem="it4-Y9-BhM" firstAttribute="leading" secondItem="sx4-1j-unJ" secondAttribute="leading" constant="40" id="VLn-Pk-cdR"/>
+                            <constraint firstItem="sx4-1j-unJ" firstAttribute="bottom" secondItem="w5D-FY-Xaw" secondAttribute="bottom" constant="30" id="WF6-7z-JcY"/>
                             <constraint firstItem="sx4-1j-unJ" firstAttribute="trailing" secondItem="it4-Y9-BhM" secondAttribute="trailing" constant="40" id="i22-SC-ivX"/>
                             <constraint firstItem="sx4-1j-unJ" firstAttribute="trailing" secondItem="Rem-fI-820" secondAttribute="trailing" constant="40" id="pSb-Ix-u3Y"/>
+                            <constraint firstItem="w5D-FY-Xaw" firstAttribute="leading" secondItem="sx4-1j-unJ" secondAttribute="leading" constant="40" id="xRq-4j-M64"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sx4-1j-unJ"/>
                     </view>
                     <connections>
                         <outlet property="loginBtn" destination="it4-Y9-BhM" id="aQ6-SR-3nQ"/>
                         <outlet property="pwdTF" destination="jhv-At-tTm" id="enU-SN-vVu"/>
+                        <outlet property="testButton" destination="w5D-FY-Xaw" id="zTE-VF-YdI"/>
                         <outlet property="usesNameTF" destination="OaT-3F-0CT" id="MJM-aV-Pee"/>
                     </connections>
                 </viewController>

@@ -5,17 +5,11 @@ import RxCocoa
 import RxRelay
 import HandyJSON
 
-
 let arr = [[1, 2, 3], [4, 5]]
 let newArr = arr.flatMap { $0 }
 
 let languages = UserDefaults.standard.object(forKey: "AppleLanguages")
 print(languages as Any)
-var observable = BehaviorRelay(value: "12")
-
-observable.subscribe(onNext: { str in
-        print(str)
-})
 
 _ = Observable<Int>.timer(DispatchTimeInterval.seconds(0), period: .seconds(1), scheduler: MainScheduler.instance)
     .take(5)
@@ -28,25 +22,10 @@ _ = Observable<Int>.timer(DispatchTimeInterval.seconds(0), period: .seconds(1), 
         print($0)
     })
 
-Observable<String>.create{ observable in
-    print("AA")
-    observable.onNext("A")
-    observable.onNext("B")
-    return Disposables.create()
-}.subscribe { (str) in
-    print(str)
-}
-
 let group = DispatchGroup()
 group.enter()
 //Dispatch.quen.MainScheduler
-let arrayNested: Array<[Int]> = [[1,2,3,4,5],[6,7]]
 
-let maped2 = arrayNested.map { $0 }
-print(maped2) // [[1, 2, 3, 4, 5], [6, 7]]
-
-let flaped2 = arrayNested.flatMap { $0 }
-print(flaped2) // [1, 2, 3, 4, 5, 6, 7]
 
 
 func add(_ num: Int) -> (Int) -> Int {

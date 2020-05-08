@@ -16,6 +16,7 @@ import RxAlamofire
 //import BluetoothSDK
 
 class BaseViewController: UIViewController {
+    let disposeBag = DisposeBag()
     
     fileprivate lazy var requestButton: UIButton = {
         var btn = UIButton.init(type: UIButton.ButtonType.custom)

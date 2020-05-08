@@ -17,17 +17,24 @@ class LoginVC: BaseViewController, StoryboardBased {
     @IBOutlet weak var pwdTF: UITextField!
     
     @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var testButton: UIButton!
     
-    let disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Mall"
+        title = "Login..."
         
         let viewModel = LoginVM(userNmae: usesNameTF.rx.text.orEmpty.asDriver(), password: pwdTF.rx.text.orEmpty.asDriver())
-        viewModel.loginEnabled.asObservable().bind(to: loginBtn.rx.isEnabled).disposed(by: disposeBag)
-        let relay = BehaviorRelay<String>(value: "sss")
         
-        relay.flatMap { BehaviorRelay<String>(value: $0) }
+        viewModel.loginEnabled.asObservable().bind(to: loginBtn.rx.isEnabled).disposed(by: disposeBag)
+        
+        testButton.rx.tap.subscribe(onNext: {
+            self.show(TestRxViewController.instantiate(), sender: nil)
+        }).disposed(by: disposeBag)
+        
+        viewModel.validatedUsername.asObservable().subscribe(onNext: {
+            print("111:", $0)
+        })
+        .disposed(by: disposeBag)
     }
 }
 

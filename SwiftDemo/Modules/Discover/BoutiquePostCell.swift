@@ -36,10 +36,10 @@ class BoutiquePostCell: UICollectionViewCell {
     
     var model: PostModel! {
         didSet{
-            let img = model.imgs?[0]
+//            let img = model.imgs?.first
             let avatorUrlString = model.author!.avatorUrl!
             avatarImageView.kf.setImage(with: URL(string: avatorUrlString))
-            coverImageView.kf.setImage(with: URL(string: img!.url!))
+//            coverImageView.kf.setImage(with: URL(string: img!.url!))
             nickNameLabel.text = model.author?.name
             timeLineLabel.text = DateFormatter.mdhm.string(from: Date(timeIntervalSince1970: model.createTime!))
             contentLabel.text = model.title

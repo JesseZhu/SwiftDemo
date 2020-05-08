@@ -43,9 +43,17 @@ func testArray() {
     let namess = students.flatMap({$0.name})
     print("所有学生的姓名：\(namess)")
     
+    let arrayNested: Array<[Int]> = [[1,2,3,4,5],[6,7]]
+
+    let maped2 = arrayNested.map { $0 }
+    print(maped2) // [[1, 2, 3, 4, 5], [6, 7]]
+
+    let flaped2 = arrayNested.flatMap { $0 }
+    print(flaped2) // [1, 2, 3, 4, 5, 6, 7]
     
     let numbers = [1, 2, 3, 4, 5]
     let doubled = numbers.map { $0 * 2 }
+    print(doubled)
     
     let milesToPoint = ["point1":120.0,"point2":50.0,"point3":70.0]
     let kmToPoint = milesToPoint.map { (key,value)  in
