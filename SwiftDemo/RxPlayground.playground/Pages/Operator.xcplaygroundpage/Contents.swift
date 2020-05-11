@@ -44,6 +44,7 @@ publishSubject2.onNext(5)
 //: **Zip** 把多个序列组合成到一起并触发一个值，但只有每一个序列都发射了一个值之后才会组合成一个新的值并发出来
 let publishSubject3 = PublishSubject<String>()
 let publishSubject4 = PublishSubject<Int>()
+let latestFromSubject = PublishSubject<Int>()
 
 Observable.zip(publishSubject3, publishSubject4){
     "\($0) \($1/2)"
@@ -57,7 +58,7 @@ Observable.zip(publishSubject3, publishSubject4){
 Observable.combineLatest(publishSubject3, publishSubject4){
     "\($0) \($1*2)"
 }.map{
-    $0 + " 装换操作"
+    $0 + " 转换操作"
 }
 .subscribe(onNext: {
     print("combineLatest:", $0)
@@ -65,10 +66,16 @@ Observable.combineLatest(publishSubject3, publishSubject4){
     .disposed(by: disposeBag)
 
 publishSubject3.onNext("7")
-publishSubject4.onNext(8)
-publishSubject3.onNext("9")
-publishSubject4.onNext(8)
+publishSubject4.onNext(8)//combineLatest: 7 16 转换操作
+publishSubject3.onNext("9")//combineLatest: 9 16 转换操作
+publishSubject4.onNext(8)//combineLatest: 9 16 转换操作
 
+//: **withLatestFrom** 操作符将两个 Observables 中最新的元素通过一个函数组合起来，然后将这个组合的结果发出来。当第一个 Observable 发出一个元素时，就立即取出第二个 Observable 中最新的元素，通过一个组合函数将两个最新的元素合并后发送出去
+latestFromSubject.withLatestFrom(publishSubject4).subscribe(onNext: {
+    print("withLatestFrom: ", $0)
+    })
+publishSubject4.onNext(6)
+latestFromSubject.onNext(999)
 //: **flatMap** 把当前序列的元素转换成一个新的序列，并把他们合并成一个序列，这个在我们的一个可被观察者序列本身又会触发一个序列的时候非常有用，比如发送一个新的网络请求
 //: **flatMapLatest** 和faltMap不同的是，flatMapLatest在收到一个新的序列的时候，会丢弃原有的序列 , flatMapLatest相当于map和switchLatest操作的组合
 struct Player {

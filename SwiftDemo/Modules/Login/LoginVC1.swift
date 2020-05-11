@@ -16,9 +16,6 @@ class LoginVC: BaseViewController, StoryboardBased {
     @IBOutlet weak var usesNameTF: UITextField!
     @IBOutlet weak var pwdTF: UITextField!
     
-    @IBOutlet weak var userNameValidateLabel: UILabel!
-    @IBOutlet weak var pwdValidateLabel: UILabel!
-    
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var testButton: UIButton!
     
@@ -34,23 +31,10 @@ class LoginVC: BaseViewController, StoryboardBased {
             self.show(TestRxViewController.instantiate(), sender: nil)
         }).disposed(by: disposeBag)
         
-        viewModel.validatedUsername.asObservable().bind(to: userNameValidateLabel.rx.validationResult).disposed(by: disposeBag)
-        
-        viewModel.validatedPwd.asObservable().bind(to: pwdValidateLabel.rx.validationResult).disposed(by: disposeBag)
-        
         viewModel.validatedUsername.asObservable().subscribe(onNext: {
-            print("validatedUsername:", $0)
+            print("111:", $0)
         })
         .disposed(by: disposeBag)
-        
-        loginBtn.rx.tap.subscribe(onNext: {
-            viewModel.registAction.accept(())
-        }).disposed(by: disposeBag)
-        
-        viewModel.registed.subscribe {
-            print("********:", $0)
-        }.disposed(by: disposeBag)
-        
     }
 }
 
@@ -62,12 +46,3 @@ class LoginVC: BaseViewController, StoryboardBased {
 //    }
 //  }
 //}
-
-extension Reactive where Base: UILabel {
-    var validationResult: Binder<ValidationResult> {
-        return Binder(self.base) {label, result in
-            label.textColor = result.textColor
-            label.text = result.description
-        }
-    }
-}
