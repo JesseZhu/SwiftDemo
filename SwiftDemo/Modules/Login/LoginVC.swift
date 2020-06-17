@@ -25,10 +25,14 @@ class LoginVC: BaseViewController, StoryboardBased {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Login..."
-        
+        bindEvent()
+    }
+    
+    private func bindEvent() {
         let viewModel = LoginVM(userNmae: usesNameTF.rx.text.orEmpty.asDriver(), password: pwdTF.rx.text.orEmpty.asDriver())
-        
         viewModel.loginEnabled.asObservable().bind(to: loginBtn.rx.isEnabled).disposed(by: disposeBag)
+        
+        viewModel.sucessMessage => rx[UIViewController.showAlertView]
         
         testButton.rx.tap.subscribe(onNext: {
             self.show(TestRxViewController.instantiate(), sender: nil)
@@ -50,7 +54,15 @@ class LoginVC: BaseViewController, StoryboardBased {
         viewModel.registed.subscribe {
             print("********:", $0)
         }.disposed(by: disposeBag)
-        
+    }
+}
+
+extension Reactive where Base: UILabel {
+    var validationResult: Binder<ValidationResult> {
+        return Binder(self.base) {label, result in
+            label.textColor = result.textColor
+            label.text = result.description
+        }
     }
 }
 
@@ -62,12 +74,3 @@ class LoginVC: BaseViewController, StoryboardBased {
 //    }
 //  }
 //}
-
-extension Reactive where Base: UILabel {
-    var validationResult: Binder<ValidationResult> {
-        return Binder(self.base) {label, result in
-            label.textColor = result.textColor
-            label.text = result.description
-        }
-    }
-}

@@ -26,8 +26,6 @@ let group = DispatchGroup()
 group.enter()
 //Dispatch.quen.MainScheduler
 
-
-
 func add(_ num: Int) -> (Int) -> Int {
     return { ss in
         return ss * num

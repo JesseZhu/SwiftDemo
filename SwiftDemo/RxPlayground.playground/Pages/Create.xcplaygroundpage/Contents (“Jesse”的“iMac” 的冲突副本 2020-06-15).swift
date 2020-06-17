@@ -16,7 +16,7 @@ func testCreateObservable() {
     let button = UIButton()
     
     //: 常见的创建序列的方法
-    Observable<String>.create{ observable in
+    let obsever = Observable<String>.create{ observable in
         print("AA")
         observable.onNext("A")
         observable.onNext("B")
@@ -28,18 +28,8 @@ func testCreateObservable() {
     }
     .disposed(by: disposeBag)
     
-    let m1 = Observable<String?>.create { observer -> Disposable in
-        observer.onNext("123")
-        return Disposables.create()
-    }
+//    obsever.do(on)
     
-    let m2 = m1.compactMap({ $0 })
-    
-    m2.subscribe(onNext:  { (str) in
-        
-           print("Optional Obserable:", str)
-       })
-
     //: Rx 对 Cocoa 的扩展
     let observabeTapped = button.rx.tap.asObservable()
     

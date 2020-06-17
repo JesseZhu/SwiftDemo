@@ -29,7 +29,7 @@ class GithubAPI {
     }
     
     func register(_ username: String, pwd: String) -> Observable<Bool> {
-        let registerResult = arc4random() % 5 == 0 ? false : true
+        let registerResult = arc4random() % 2 == 0 ? false : true
         return Observable.just(registerResult)
             .delay(.seconds(2), scheduler: MainScheduler.instance)
     }

@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		10AD1D0DC0D60A57EAB5ABA7 /* Pods_SwiftDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F33EB18AA87A3A29A9A39E4 /* Pods_SwiftDemo.framework */; };
+		880F6B1A247BB89B009A1A1E /* UIViewController+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880F6B19247BB89B009A1A1E /* UIViewController+Toast.swift */; };
+		880F6B20247BBA4A009A1A1E /* UnidirectionalBinding+Reactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880F6B1F247BBA4A009A1A1E /* UnidirectionalBinding+Reactive.swift */; };
+		880F6B22247BBA74009A1A1E /* Lifetime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880F6B21247BBA74009A1A1E /* Lifetime.swift */; };
+		880F6B24247BC143009A1A1E /* Result+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880F6B23247BC143009A1A1E /* Result+Extension.swift */; };
+		880F6B26247BDAE0009A1A1E /* AnyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880F6B25247BDAE0009A1A1E /* AnyError.swift */; };
 		882C9C6A2465551500EC5AE2 /* TestRxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882C9C692465551500EC5AE2 /* TestRxViewController.swift */; };
 		882C9C6C2465552800EC5AE2 /* TestRxViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882C9C6B2465552800EC5AE2 /* TestRxViewController.storyboard */; };
 		883360CF23CC65D50084988E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 883360D123CC65D50084988E /* InfoPlist.strings */; };
@@ -69,6 +74,11 @@
 /* Begin PBXFileReference section */
 		29B608F9F168E5FD2B91D2BA /* Pods-SwiftDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDemo.release.xcconfig"; path = "Target Support Files/Pods-SwiftDemo/Pods-SwiftDemo.release.xcconfig"; sourceTree = "<group>"; };
 		867705F57BF25C208D8E8AEE /* Pods-SwiftDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDemo.debug.xcconfig"; path = "Target Support Files/Pods-SwiftDemo/Pods-SwiftDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		880F6B19247BB89B009A1A1E /* UIViewController+Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Toast.swift"; sourceTree = "<group>"; };
+		880F6B1F247BBA4A009A1A1E /* UnidirectionalBinding+Reactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnidirectionalBinding+Reactive.swift"; sourceTree = "<group>"; };
+		880F6B21247BBA74009A1A1E /* Lifetime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lifetime.swift; sourceTree = "<group>"; };
+		880F6B23247BC143009A1A1E /* Result+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Extension.swift"; sourceTree = "<group>"; };
+		880F6B25247BDAE0009A1A1E /* AnyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyError.swift; sourceTree = "<group>"; };
 		8817A0E52383876100EE6431 /* BluetoothSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BluetoothSDK.xcodeproj; path = BluetoothSDK/BluetoothSDK.xcodeproj; sourceTree = "<group>"; };
 		8820625423C6D3DF0028E611 /* RxPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RxPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		882C9C692465551500EC5AE2 /* TestRxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRxViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +155,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		880F6B1E247BBA3E009A1A1E /* Rx */ = {
+			isa = PBXGroup;
+			children = (
+				880F6B1F247BBA4A009A1A1E /* UnidirectionalBinding+Reactive.swift */,
+				880F6B21247BBA74009A1A1E /* Lifetime.swift */,
+			);
+			path = Rx;
+			sourceTree = "<group>";
+		};
 		8817A0E62383876100EE6431 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,9 +206,11 @@
 		883790062421C26C00BFAA11 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				880F6B1E247BBA3E009A1A1E /* Rx */,
 				88BDC243238FB5E20052D8B2 /* ViewModel.swift */,
 				886645CF238E505F00110B07 /* NavigationController.swift */,
 				88C1FC88236FFA13008AA1B5 /* BaseViewController.swift */,
+				880F6B25247BDAE0009A1A1E /* AnyError.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -267,6 +288,8 @@
 				88BDC23E238FA92A0052D8B2 /* UIColor+Extension.swift */,
 				88AF71A22397C57300CFC9E0 /* DateFormatter+Extension.swift */,
 				88BDC24B238FD9FF0052D8B2 /* Extension.swift */,
+				880F6B19247BB89B009A1A1E /* UIViewController+Toast.swift */,
+				880F6B23247BC143009A1A1E /* Result+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -513,6 +536,7 @@
 				88738FDD238E8F0200B6C8E0 /* PageContainerController.swift in Sources */,
 				88C1FC9923700F3B008AA1B5 /* Model.swift in Sources */,
 				88BDC23F238FA92A0052D8B2 /* UIColor+Extension.swift in Sources */,
+				880F6B26247BDAE0009A1A1E /* AnyError.swift in Sources */,
 				88BDC242238FB5B20052D8B2 /* BoutiqueVC.swift in Sources */,
 				88738FE0238E981100B6C8E0 /* DiscoverViewController.swift in Sources */,
 				884A67D8239124EC00A41837 /* HTTPManager.swift in Sources */,
@@ -521,14 +545,18 @@
 				88BDC249238FCCA30052D8B2 /* BoutiquePostCell.swift in Sources */,
 				8837900B2421C45600BFAA11 /* LoginVM.swift in Sources */,
 				88BDC24C238FD9FF0052D8B2 /* Extension.swift in Sources */,
+				880F6B24247BC143009A1A1E /* Result+Extension.swift in Sources */,
+				880F6B20247BBA4A009A1A1E /* UnidirectionalBinding+Reactive.swift in Sources */,
 				88F86ED323940B3000BEC4C5 /* Author.swift in Sources */,
 				883790192421F7E900BFAA11 /* ActivityIndicator.swift in Sources */,
 				88BDC246238FB8930052D8B2 /* BoutiqueVM.swift in Sources */,
 				88C1FC89236FFA13008AA1B5 /* BaseViewController.swift in Sources */,
 				8837904F24224DC200BFAA11 /* LibsManager.swift in Sources */,
 				886645D0238E505F00110B07 /* NavigationController.swift in Sources */,
+				880F6B1A247BB89B009A1A1E /* UIViewController+Toast.swift in Sources */,
 				882C9C6A2465551500EC5AE2 /* TestRxViewController.swift in Sources */,
 				88F86ED523940CE000BEC4C5 /* Post.swift in Sources */,
+				880F6B22247BBA74009A1A1E /* Lifetime.swift in Sources */,
 				884A67DC239125AE00A41837 /* PIOURLRequest.swift in Sources */,
 				88AF71A32397C57300CFC9E0 /* DateFormatter+Extension.swift in Sources */,
 				88C1FC87236FFA13008AA1B5 /* AppDelegate.swift in Sources */,

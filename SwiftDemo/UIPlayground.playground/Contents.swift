@@ -16,16 +16,21 @@ class ViewController1 : UIViewController {
         
         view.addSubview(label)
         
-        let rect:CGRect = CGRect(x: 30, y: 30, width: 60 , height: 60)
-        let imageView = UIView(frame: rect)
+        let rect:CGRect = CGRect(x: 30, y: 30, width: 50 , height: 50)
+        let contentView = UIView(frame: rect)
+        contentView.backgroundColor = .green
+        view.addSubview(contentView)
+        
+        let imageView = UIView(frame: CGRect(origin: .init(x: 5, y: 5), size: .init(width: 60, height: 60)))
         imageView.layer.cornerRadius = 10
 //        imageView.layer.masksToBounds = true
         imageView.backgroundColor = .red
-        imageView.layer.shadowRadius = 10
+        
+        imageView.layer.shadowRadius = 5
         imageView.layer.shadowOpacity = 0.8;
-        imageView.layer.shadowOffset = CGSize(width: 5, height: -2)
+        imageView.layer.shadowOffset = CGSize(width: 2, height: 5)
         imageView.layer.shadowColor = UIColor.black.cgColor
-        view.addSubview(imageView)
+        contentView.addSubview(imageView)
         self.view = view
         
         let view1 = UIView(frame: CGRect(x: 100, y: 150, width:230, height: 100))

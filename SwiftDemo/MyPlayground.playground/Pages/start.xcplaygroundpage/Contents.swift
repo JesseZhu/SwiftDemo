@@ -1,9 +1,5 @@
 import UIKit
-//import RxSwift
-//import RxCocoa
-//import RxRelay
 import HandyJSON
-
 //print(UIDevice.current.identifierForVendor?.uuidString)
 
 func testURLComponents() {
@@ -33,91 +29,68 @@ func testArray() {
     let student2 = Student(name: "李四", age: 24)
     let student3 = Student(name: "王二", age: 25)
     
-    let students = [student1, student2, student3]
+    let students = [student1, student2, student3, nil]
     
-    _ = students.map { (std) -> Int in
-        return std.age - 20
-    } // [3, 4, 5]
+//    students.compactMap { str -> String? in
+//        return str
+//    }
     
-    _ = students.map {
-        NumberFormatter.localizedString(from: $0.age - 20 as NSNumber, number: .spellOut)
-    }
-    
-    _ = students.filter{
-        $0.age > 23
-    }
-    
-    _ = students.reduce(10, { (ss, std) -> Int in
-        ss + std.age
-    }) //: 82
-    
-    _ = students.reduce("=="){ text, std in
-        text + std.name
-    }//: ==张三李四王二
+//    students.compactMap { (std) -> String? in
+////        if let s = std {
+//            return s.name
+////        }
+//    }
     
     let names = students.compactMap {
-        $0.name
+        $0?.name
     }
-    print("所有学生的姓名：\(names)")
     
-    /**
-     Sequence.flatMap<S>(_ transform: (Element) -> S)
-     -> [S.Element] where S : Sequence
-     */
-    let namess = students.flatMap({$0.name})
-    print("所有学生的姓名：\(namess)")
+    print("compactMap所有学生的姓名：\(names)")  //compactMap所有学生的姓名：["张三", "李四", "王二"]
+    
+    let namess = students.flatMap( {$0?.name} )
+    print("flatMap所有学生的姓名：\(namess)") //flatMap所有学生的姓名：["张", "三", "李", "四", "王", "二"]
+    
+    print("map所有学生的姓名：\(students.map{$0?.name})")
     
     let arrayNested: Array<[Int]> = [[1,2,3,4,5],[6,7]]
 
-    _ = arrayNested.flatMap { $0 } //[1, 2, 3, 4, 5, 6, 7]
-    _ = arrayNested.flatMap({ $0.filter( { $0 > 4 } ) }) //: [5, 6, 7]
-    _ = arrayNested.flatMap{
-        $0.filter {
-            $0 > 4
-        }
-    } //: [5, 6, 7]
+    let maped2 = arrayNested.map { $0 }
+    print(maped2) // [[1, 2, 3, 4, 5], [6, 7]]
+
+    let flaped2 = arrayNested.flatMap { $0 }
+    print(flaped2) // [1, 2, 3, 4, 5, 6, 7]
     
-    //: flatMap fot optional value
-    let input: Int? = Int("7")
-    let passMark: Int? = input.flatMap {
-        $0 > 5 ? $0 : nil
-    } //: 7
+    let numbers = [1, 2, 3, 4, 5]
+    let doubled = numbers.map { $0 * 2 }
+    print(doubled)
     
-    let keys: [String?] = ["Tom", nil, "Peter", nil, "Harry"]
-    _ = keys.compactMap { (str) -> String? in
-        str
+    let milesToPoint = ["point1":120.0,"point2":50.0,"point3":70.0]
+    let kmToPoint = milesToPoint.map { (key,value)  in
+        return key
     }
-    
-    _ = keys.compactMap{
-        $0?.count
-    }// [3, 5, 5]
+//    let ff = milesToPoint.reduce("all") { (str, arg1)  in
+//        return arg1.key + str
+//    }
+    print(kmToPoint)
 }
 
 testArray()
 
 func testDict() {//字典排序
-    let milesToPoint = ["point1":120.0,"point2":50.0,"point3":70.0]
-    
-    let kmToPoint = milesToPoint.map { (key,meils)  in
-        return meils*10
-    }
-    let keyss = milesToPoint.map { (key, value)  in
+    let dict = ["2227":"w","2215":"bbt","36":"bba"]
+
+    let keyss = dict.map { (key, value)  in
         return key
     }
-    let keyssss = milesToPoint.filter { (key, value) in
+    let keyssss = dict.filter { (key, value) in
         return key != "15"
     }
-    
-    _ = milesToPoint.reduce("all") { (str, arg1)  in
-        return arg1.key + str
-    }
-    print(kmToPoint)
 
     print(keyss)
     print(keyssss)
     
-    let keys = milesToPoint.sorted(by: {$0.0 < $1.0})
-    let values = milesToPoint.sorted(by: {$0.1 < $1.1})
+    let keys = dict.sorted(by: {$0.0 < $1.0})
+    let values = dict.sorted(by: {$0.1 < $1.1})
 
     print(keys)
     print(values)
@@ -128,7 +101,9 @@ func testDict() {//字典排序
 let quote = "The revolution will be Swift"
 let substring = quote.dropFirst(2)
 let realString = String(substring)
+
 let max = Int.max
+
 
 var arr1 = [[1,2,nil,3],[4,5,6, nil]]
 var arrr3 = arr1.flatMap { (sss) -> [Int?] in
@@ -323,7 +298,6 @@ let dd = try? divdiv(2, 4)
 
 struct MM: Codable, CustomStringConvertible, HandyJSON {
     
-    
     var name: String?
     var  points: Int?
     var descriptions: String?
@@ -421,7 +395,7 @@ enum Gender: Int {
     case female
 }
 
-class Person {
+class Person: CustomStringConvertible {
     var name: String
     var age: Int
     var score: Int
@@ -433,6 +407,10 @@ class Person {
         self.score = score
         self.gender = gender
     }
+    
+    var description: String {
+        return "name: \(name), age: \(age)"
+    }
 }
 
 let tom = Person(name: "Tom", age: 12, score: 77, gender: .male)
@@ -440,6 +418,8 @@ let tim = Person(name: "Tim", age: 17, score: 82, gender: .male)
 let jack = Person(name: "Jack", age: 18, score: 83, gender: .male)
 let lucy = Person(name: "Lucy", age: 21, score: 85, gender: .male)
 let ann = Person(name: "Ann", age: 30, score: 87, gender: .male)
+
+print(tom.description)
 
 //MARK: 面向协议编程
 struct MJ<Base> {
@@ -513,14 +493,8 @@ testStringMJ.mj.test()
 //: Heading 1
 //MARK: KeyPath
 extension Sequence {
-    func map<T>(_ keyPath: KeyPath<Element, T>) -> [T] {
-        return map {$0[keyPath: keyPath]}
-    }
-    
-//    func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>) -> [Element] {
-//        return sorted { a, b in
-//            return a[keyPath: KeyPath] < b[keyPath: keyPath]
-//        }
+//    func map<T>(_ keyPath: KeyPath<Element, T>) -> [T] {
+//        return map {$0[keyPath: keyPath]}
 //    }
     
     func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>) -> [Element] {
@@ -531,14 +505,22 @@ extension Sequence {
 }
 
 func testKeyPath() {
-    var persons = [tom, tim, jack, lucy, ann]
-    
+    let persons = [tom, tim, jack, lucy, ann]
     let sortByname = persons.sorted{ $0.score > $1.score }
     let sortByname2 = persons.sorted(by: \.score)
     let allName = sortByname.map{ $0.name }
     let allName2 = sortByname2.map(\.score)
-    
+    print(allName)
     print(allName2)
+    let nameKeypath:KeyPath<Person, Int> = \.score
+    let tomname = tom[keyPath: nameKeypath]
 }
 
 testKeyPath()
+
+
+struct Person1: Hashable {
+    let age: Int
+    let name: String
+    let id: UUID
+}

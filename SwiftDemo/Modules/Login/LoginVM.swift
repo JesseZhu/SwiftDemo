@@ -56,6 +56,8 @@ class LoginVM: ViewModel {
     
     //output
     let registed: Observable<Bool>
+    let sucessMessage: Observable<String>
+    let errorMessage: Observable<String>
     
     init(userNmae: Driver<String>, password: Driver<String>) {
         validatedUsername = userNmae.flatMapLatest({ username -> Driver<ValidationResult> in
@@ -100,7 +102,7 @@ class LoginVM: ViewModel {
         }
         
         
-        registAction.withLatestFrom(userNameAndPwd).flatMapLatest { (username, pwd) -> Observable<Bool> in
+        let registerResult = registAction.withLatestFrom(userNameAndPwd).flatMapLatest { (username, pwd) -> Observable<Bool> in
             GithubAPI.shareAPI.register(username, pwd: pwd)
                 .observeOn(MainScheduler.instance)
                 .catchErrorJustReturn(false)
@@ -123,5 +125,14 @@ class LoginVM: ViewModel {
         loginEnabled = Driver.combineLatest(validatedUsername, validatedPwd) {
             return $0.isSucess && $1.isSucess
         }.distinctUntilChanged()
+        
+        sucessMessage = registerResult.map{
+            $0 ? "操作成功" : "操作失败"
+        }.share(replay: 1)
+        
+//        sucessMessage = Observable.just("操作成功")
+        
+//        registerResult.share(replay: <#T##Int#>, scope: <#T##SubjectLifetimeScope#>)
+        errorMessage = Observable.just("Oops 出错了").share(replay: 1)
     }
 }

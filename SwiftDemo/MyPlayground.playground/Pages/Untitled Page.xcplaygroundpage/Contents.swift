@@ -33,15 +33,24 @@ func testArray() {
     let student2 = Student(name: "李四", age: 24)
     let student3 = Student(name: "王二", age: 25)
     
-    let students = [student1, student2, student3]
+    let students = [student1, student2, student3, nil]
+    
+    students.compactMap { (std) -> String? in
+        if let s = std {
+            return s.name
+        }
+    }
     
     let names = students.compactMap {
         $0.name
     }
-    print("所有学生的姓名：\(names)")
+    
+    print("compactMap所有学生的姓名：\(names)")  //compactMap所有学生的姓名：["张三", "李四", "王二"]
     
     let namess = students.flatMap({$0.name})
-    print("所有学生的姓名：\(namess)")
+    print("flatMap所有学生的姓名：\(namess)") //flatMap所有学生的姓名：["张", "三", "李", "四", "王", "二"]
+    
+    print("map所有学生的姓名：\(students.map{$0.name})")
     
     let arrayNested: Array<[Int]> = [[1,2,3,4,5],[6,7]]
 
@@ -479,14 +488,8 @@ testStringMJ.mj.test()
 //: Heading 1
 //MARK: KeyPath
 extension Sequence {
-    func map<T>(_ keyPath: KeyPath<Element, T>) -> [T] {
-        return map {$0[keyPath: keyPath]}
-    }
-    
-//    func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>) -> [Element] {
-//        return sorted { a, b in
-//            return a[keyPath: KeyPath] < b[keyPath: keyPath]
-//        }
+//    func map<T>(_ keyPath: KeyPath<Element, T>) -> [T] {
+//        return map {$0[keyPath: keyPath]}
 //    }
     
     func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>) -> [Element] {
@@ -497,14 +500,27 @@ extension Sequence {
 }
 
 func testKeyPath() {
-    var persons = [tom, tim, jack, lucy, ann]
-    
+    let persons = [tom, tim, jack, lucy, ann]
     let sortByname = persons.sorted{ $0.score > $1.score }
     let sortByname2 = persons.sorted(by: \.score)
     let allName = sortByname.map{ $0.name }
     let allName2 = sortByname2.map(\.score)
-    
+    print(allName)
     print(allName2)
+    let nameKeypath:KeyPath<Person, Int> = \.score
+    let tomname = tom[keyPath: nameKeypath]
+    
+    let n1 = tom[keyPath: \.score]
+    
+    
+    
 }
 
 testKeyPath()
+
+
+struct Person1: Hashable {
+    let age: Int
+    let name: String
+    let id: UUID
+}

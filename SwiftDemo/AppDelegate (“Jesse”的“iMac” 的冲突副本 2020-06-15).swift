@@ -23,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
         
+        let students = ["", "", "", nil]
+        let names = students.compactMap {
+            $0
+        }
         return true
     }
 

@@ -72,7 +72,7 @@ publishSubject4.onNext(8)//combineLatest: 9 16 转换操作
 
 //: **withLatestFrom** 操作符将两个 Observables 中最新的元素通过一个函数组合起来，然后将这个组合的结果发出来。当第一个 Observable 发出一个元素时，就立即取出第二个 Observable 中最新的元素，通过一个组合函数将两个最新的元素合并后发送出去
 latestFromSubject.withLatestFrom(publishSubject4).subscribe(onNext: {
-    print("withLatestFrom: ", $0)
+    print("withLatestFrom: ", $0) //withLatestFrom:  6
     })
 publishSubject4.onNext(6)
 latestFromSubject.onNext(999)
@@ -92,6 +92,11 @@ player.asObservable()
     .subscribe(onNext: { print("flatMapLatest or flatMap:", $0) })
     .disposed(by: disposeBag)
 
+player.asObservable()
+.flatMapLatest { $0.score.asObservable() } // Change flatMap to flatMapLatest and observe change in printed output
+.subscribe(onNext: { print("flatMapLatest1 or flatMap:", $0) })
+.disposed(by: disposeBag)
+
 👦🏻.score.accept(85)
 player.accept(👧🏼)
 👦🏻.score.accept(95)  // Will be printed when using flatMap, but will not be printed when using flatMapLatest
@@ -105,6 +110,8 @@ Observable.of(10, 100, 1000)
 .subscribe(onNext: { print("scan:", $0) })
 .disposed(by: disposeBag)
 
+
+
 //: **filter**
 Observable.of(10, 100, 1000)
     .filter {
@@ -112,6 +119,17 @@ Observable.of(10, 100, 1000)
 }
 .subscribe(onNext: { print("filter:", $0) })
 .disposed(by: disposeBag)
+
+Observable.of(true)
+    .filter{ $0 }
+    .subscribe(onNext: { print("filter:", $0) })
+    .disposed(by: disposeBag)
+
+let mm = Observable.of(false)
+
+mm.filter{$0}
+    .subscribe(onNext: { print("filter:", $0) })
+    .disposed(by: disposeBag)
 
 //: **distinctUntilChanged** 过滤掉连续发射的重复数据
 Observable.of("A", "B", "C", "C", "D", "D", "E", "C", "F")
@@ -204,5 +222,22 @@ publishSubject6.onNext("DD")
 publishSubject5.onNext("EE")
 publishSubject5.onNext("FF")
 
+//: **timer**
+
+Observable<Int>.timer(.seconds(1), period: .seconds(1), scheduler: MainScheduler.init())
+    .take(5)
+    .subscribe(onNext: {
+        print("timer:", $0 + 1)
+    })
+    .disposed(by: disposeBag)
+
+Observable<NSNumber>.of(123, 4, 56)
+.map {
+    NumberFormatter.string(from: $0) ?? ""
+}
+.subscribe(onNext: {
+    print($0)
+})
+.disposed(by: disposeBag)
 
 //: [Next](@next)
